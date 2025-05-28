@@ -4,3 +4,7 @@ projs
 
 build/
 docs/
+
+.c
+.h
+ostep*
