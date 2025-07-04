@@ -1,6 +1,6 @@
 #include<stdio.h>
 
-void update_value(int *pAge);
+void update_value_str(int *pAge);
 
 int main(){
 
@@ -10,7 +10,7 @@ int main(){
     printf("[pre] %d address at: %p (&age)\n",   age, &age);
     printf("[pre] %d address at: %p (*pAge)\n\n",  age, pAge);
 
-    update_value(&age);
+    update_value_str(&age);
 
     printf("[pos] %d address at: %p (&age)\n",   age, &age);
     printf("[pos] %d address at: %p (*pAge)\n\n",  age, pAge);
@@ -18,6 +18,6 @@ int main(){
     return 0;
 }
 
-void update_value(int *pAge){
+void update_value_str(int *pAge){
     (*pAge)=420;
 }
