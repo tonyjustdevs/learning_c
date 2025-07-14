@@ -22,7 +22,7 @@ int main(){
     for (int i = 0; i < number; i++)
     {
         // printf("grade %d: [%c]\n", i+1, *(grades+i));
-        printf("%c ", grades[i]);
+        printf("%c ", grades[i]);b
     }   
     
     free(grades); // return rented memory to os
