@@ -25,5 +25,3 @@ int main(){
     // printf("%d\n", *pn);
     return 0;
 }
-
-
