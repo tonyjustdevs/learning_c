@@ -1,0 +1,1 @@
+void hellofn(const char* name);
