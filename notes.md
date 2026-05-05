@@ -29,3 +29,42 @@ default dirs:
 - `/usr/lib`
 - `/lib/x86_64-linux-gnu`
 - `/usr/lib/x86_64-linux-gnu`
+
+# fully manual pipeline
+### main.c → (preprocess) → (compile) → (assemble) → (link) → a.out:
+
+|step|code|output|
+|-|-|-|
+| preprocess only<br>- via `cpp` (preprocessor)| `gcc -E main.c > main.i`| - `main.i`|
+| compile only (to assembly)<br>- via `cc1` (compiler)| `gcc -S main.c`| - preprocesses<br>- compiles<br>- writes `main.s`|
+| assemble only<br>- via `as` (assembler)| `gcc -c main.c` | - preprocesses<br>- compiles<br>- assembles<br>- writes `main.o`|
+| link<br>- via `ld` (linker) | `gcc -o main.c -lm` | linking<br> = combining + resolving<br> -> executable<br><br>that is:<br>- combining object files<br>- resolving symbols (like sqrt)<br>- producing final executable|
+
+
+
+# tp compilation process notes: 
+### 1. Pre-processing  
+#### 1.1 `main.c`:  
+- ***copies*** contents `hello.h` (directive) to `main.c`
+- usually **function signatures**, **structs** etc
+
+### 2. Compilation (to object files `.o`)
+#### 2.1 `main.c` -> `main.o`:
+- sees a call to `hello_method()`
+- generates machine code to call `hello_method()`
+- no compilation error because `hello_method()` already declared
+    - trusts implementation will be provided in the future
+- creates **placeholder** `hello_method()`:
+    - or **symbol reference**
+    - or **undefined reference** 
+    - or **external symbol**
+
+#### 2.2 `hello.c` -> `hello.o`:
+- create actual machine code for `hello_method()`
+
+### 3. Linking (linker `ld`)
+Takes all object files + libraries & combines into one executable
+
+#### 3.1 `main.o`:
+- Linker sees undefined refernece in `main.o`
+    - Linker looks through all `.o` files & finds declaration/implementation
